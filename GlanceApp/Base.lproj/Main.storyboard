@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Glance" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="81" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gu8-ff-GhI">
+                                <rect key="frame" x="-4" y="64" width="328" height="460"/>
+                                <color key="backgroundColor" red="0.98992034313725485" green="0.76347209982900111" blue="0.26775384182559447" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="KNX-qu-PAS"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="n3g-n9-lw8"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Y5-G1-1oK">
+                                <rect key="frame" x="-4" y="20" width="328" height="44"/>
+                                <color key="backgroundColor" red="0.99607843137254903" green="0.76470588235294112" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Results" id="v0V-9T-u4m">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt; Search" id="wDe-C4-lob">
+                                            <connections>
+                                                <action selector="searchButtonTapped:" destination="BYZ-38-t0r" id="coU-Yc-tps"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Y5-G1-1oK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="IW3-ka-aYH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gu8-ff-GhI" secondAttribute="trailing" constant="-20" id="N10-gz-NEg"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gu8-ff-GhI" secondAttribute="bottom" id="Onn-5n-oIb"/>
+                            <constraint firstItem="gu8-ff-GhI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="Zdb-RS-Zg8"/>
+                            <constraint firstItem="7Y5-G1-1oK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="ora-fG-fY0"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="gu8-ff-GhI" secondAttribute="leading" constant="20" id="pvU-pG-5gW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Y5-G1-1oK" secondAttribute="trailing" constant="-20" id="rcn-Uc-le9"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="resultsTable" destination="gu8-ff-GhI" id="Q7k-4G-UEN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="297" y="351"/>
+        </scene>
+    </scenes>
+</document>
