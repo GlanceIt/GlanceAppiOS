@@ -17,7 +17,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let SPOTLIST_URL = "/spotlist"
 
     @IBAction func searchButtonTapped(sender: UIBarButtonItem) {
-
     }
 
     func getSpotList() {
@@ -65,7 +64,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             //print("responseString = \(responseString)")
             
-            
+            dispatch_async(dispatch_get_main_queue(), {
             // Convert server json response to NSDictionary
             do {
                 if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
@@ -85,7 +84,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            
+            })
         }
         task.resume()
     }
@@ -96,56 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.resultsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        // TODO: Make the GET call to Glance Service
         getSpotList()
-        
-        /*
-        let data =
-            "[\n" +
-            "{\n" +
-            "\"_id\": \"560098bba021987fd5938ec4\",\n" +
-            "\"name\": \"Starbucks\",\n" +
-            "\"aspects\": {\"Coffee\": {\"rating\": 2,\"count\": 218}} \n" +
-            "},\n" +
-            "{\n" +
-            "\"_id\": \"560098bba021987fd5938ec4\",\n" +
-            "\"name\": \"Starbucks2\",\n" +
-            "\"aspects\": {\"Coffee\": {\"rating\": 3,\"count\": 248}} \n" +
-            "}\n" +
-            "]"
-
-        let jsonData: NSData = data.dataUsingEncoding(NSUTF8StringEncoding)!
-
-        var jsonObj: AnyObject?
-        do {
-            jsonObj = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(rawValue: 0))
-
-        } catch {
-            print(error)
-        }
-
-        if  jsonObj is Array<AnyObject> {
-            for jsonSpot in jsonObj as! Array<AnyObject>{
-                insertSpot(jsonSpot)
-            }// for
-        } // if
-
-        resultsTable.reloadData()
-        */
-    }
-
-    func insertSpot(spot: AnyObject) -> Void {
-        let dataSet: NSMutableDictionary = NSMutableDictionary()
-
-        let spotName = (spot["name"] as? String) ?? "" // to get rid of null
-        let spotAspects  =  (spot["aspects"]  as AnyObject!)
-        let coffeeRatingObj = (spotAspects["Coffee"] as AnyObject!)
-        let coffeeRating = coffeeRatingObj["rating"] as? Int
-
-        dataSet.setObject(spotName, forKey: "spotName")
-        dataSet.setObject(coffeeRating!, forKey: "spotCoffeeRating")
-
-        self.itemList.addObject(dataSet)
     }
 
     func addSpot(spot: NSDictionary) -> Void {
