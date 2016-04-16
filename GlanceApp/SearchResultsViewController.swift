@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchResultsViewController.swift
 //  GlanceApp
 //
 //  Created by Khorramzadeh, Mohammad on 4/2/16.
@@ -9,14 +9,18 @@
 import UIKit
 //import Alamofire
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var resultsTable: UITableView!
     let itemList:NSMutableArray = NSMutableArray()
     let GLANCE_SERVICE_ENDPOINT_URI = "http://ec2-52-89-65-158.us-west-2.compute.amazonaws.com:5000"
     let SPOTLIST_URL = "/spotlist"
 
-    @IBAction func searchButtonTapped(sender: UIBarButtonItem) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.resultsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        getSpotList()
     }
 
     func getSpotList() {
@@ -65,55 +69,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //print("responseString = \(responseString)")
             
             dispatch_async(dispatch_get_main_queue(), {
-            // Convert server json response to NSDictionary
-            do {
-                if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
-                    
-                    // Print out dictionary
-                    print(convertedJsonIntoDict)
-                    
-                    // Get value by key
-                    let results = convertedJsonIntoDict["result"] as? NSArray
-                    
-                    for spot in results!{
-                        self.addSpot(spot as! NSDictionary)
-                    }// for
-                    
-                    self.resultsTable.reloadData()
+                // Convert server json response to NSDictionary
+                do {
+                    if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+                        
+                        // Print out dictionary
+                        // print(convertedJsonIntoDict)
+                        
+                        // Get value by key
+                        let results = convertedJsonIntoDict["result"] as? NSArray
+                        
+                        for spot in results!{
+                            self.addSpot(spot as! NSDictionary)
+                        }// for
+                        
+                        self.resultsTable.reloadData()
+                    }
+                } catch let error as NSError {
+                    print(error.localizedDescription)
                 }
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
             })
         }
         task.resume()
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.resultsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        getSpotList()
-    }
-
     func addSpot(spot: NSDictionary) -> Void {
         let dataSet: NSMutableDictionary = NSMutableDictionary()
-        
-        let spotName = (spot["name"] as? String) ?? "" // to get rid of null
-        let spotAspects  =  (spot["aspects"]  as AnyObject!)
-        let staffRatingObj = (spotAspects["Staff"] as AnyObject!)
-        let staffRating = staffRatingObj["rating"] as? Int
-        let coffeeRatingObj = (spotAspects["Coffee"] as AnyObject!)
-        let coffeeRating = coffeeRatingObj["rating"] as? Int
-        let seatingRatingObj = (spotAspects["Seating"] as AnyObject!)
-        let seatingRating = seatingRatingObj["rating"] as? Int
-        
-        dataSet.setObject(spotName, forKey: "spotName")
-        dataSet.setObject(staffRating!, forKey: "spotStaffRating")
-        dataSet.setObject(coffeeRating!, forKey: "spotCoffeeRating")
-        dataSet.setObject(seatingRating!, forKey: "spotSeatingRating")
+        dataSet.setObject(spot, forKey: "spotDetails")
         
         self.itemList.addObject(dataSet)
     }
@@ -125,10 +107,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.resultsTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         
-        let spotName = (itemList[indexPath.row].valueForKey("spotName") as? String)!
-        let spotStaffRating = (itemList[indexPath.row].valueForKey("spotStaffRating") as? Int)!
-        let spotCoffeeRating = (itemList[indexPath.row].valueForKey("spotCoffeeRating") as? Int)!
-        let spotSeatingRating = (itemList[indexPath.row].valueForKey("spotSeatingRating") as? Int)!
+        let spotDetails = (itemList[indexPath.row].valueForKey("spotDetails") as? NSDictionary)!
+        let spotName = (spotDetails["name"] as? String)!
+
+        let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
+        let spotStaffRatingObj = (spotAspects["Staff"] as? NSDictionary)!
+        let spotStaffRating = (spotStaffRatingObj["rating"] as? Int)!
+        let spotCoffeeRatingObj = (spotAspects["Coffee"] as? NSDictionary)!
+        let spotCoffeeRating = (spotCoffeeRatingObj["rating"] as? Int)!
+        let spotSeatingRatingObj = (spotAspects["Seating"] as? NSDictionary)!
+        let spotSeatingRating = (spotSeatingRatingObj["rating"] as? Int)!
         
         cell.textLabel?.text = "\(spotName) \nStaff: \(spotStaffRating)  Coffee: \(spotCoffeeRating)  Seating: \(spotSeatingRating)"
         cell.textLabel?.numberOfLines = 0
@@ -137,16 +125,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let spotDetails = (itemList[indexPath.row].valueForKey("spotDetails") as? NSDictionary)!
         print("You selected cell #\(indexPath.row)!")
-        print(itemList[indexPath.row].valueForKey("spotName"))
-        print(itemList[indexPath.row].valueForKey("spotCoffeeRating"))
+        let detailPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("detailPageViewController") as! DetailPageViewController
+        detailPageViewController.spotDetails = spotDetails
+        navigationController?.pushViewController(detailPageViewController, animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
