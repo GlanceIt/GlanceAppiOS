@@ -9,7 +9,7 @@
         <!--Search Results View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SearchResultsViewController" customModule="Glance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchResultsViewController" id="BYZ-38-t0r" customClass="SearchResultsViewController" customModule="Glance" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="81" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gu8-ff-GhI">
-                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                            <tableView clipsSubviews="YES" contentMode="center" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="81" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="gu8-ff-GhI">
+                                <rect key="frame" x="0.0" y="36" width="320" height="532"/>
                                 <color key="backgroundColor" red="0.98992034313725485" green="0.76347209982900111" blue="0.26775384182559447" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="KNX-qu-PAS"/>
@@ -29,7 +29,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gu8-ff-GhI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7Ke-N8-rf6"/>
+                            <constraint firstItem="gu8-ff-GhI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="7Ke-N8-rf6"/>
                             <constraint firstAttribute="trailing" secondItem="gu8-ff-GhI" secondAttribute="trailing" id="KZC-xp-RVi"/>
                             <constraint firstItem="gu8-ff-GhI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OM1-hQ-akn"/>
                             <constraint firstItem="gu8-ff-GhI" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="RnR-sf-1pm"/>
@@ -37,7 +37,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="17F-Bk-fE9"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="resultsTable" destination="gu8-ff-GhI" id="Q7k-4G-UEN"/>
                     </connections>
@@ -49,7 +48,7 @@
         <!--Search View Controller-->
         <scene sceneID="nsD-nu-j3O">
             <objects>
-                <viewController id="SoZ-DR-wS2" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchViewController" id="SoZ-DR-wS2" customClass="SearchViewController" customModule="Glance" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EnN-Bs-VHc"/>
                         <viewControllerLayoutGuide type="bottom" id="x8s-vO-Jq2"/>
@@ -58,23 +57,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yE4-Wq-iPb">
-                                <rect key="frame" x="137" y="269" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RpQ-n4-gQb">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="push" id="ZFd-r0-2vs"/>
+                                    <outlet property="dataSource" destination="SoZ-DR-wS2" id="dht-W2-A8O"/>
+                                    <outlet property="delegate" destination="SoZ-DR-wS2" id="DqU-8z-X4v"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yE4-Wq-iPb" firstAttribute="leading" secondItem="85t-ra-J9X" secondAttribute="leadingMargin" constant="117" id="9tK-uv-LBj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="yE4-Wq-iPb" secondAttribute="trailing" constant="117" id="eNq-Tx-IWs"/>
-                            <constraint firstItem="x8s-vO-Jq2" firstAttribute="top" secondItem="yE4-Wq-iPb" secondAttribute="bottom" constant="269" id="hXv-Wy-URC"/>
-                            <constraint firstItem="yE4-Wq-iPb" firstAttribute="top" secondItem="EnN-Bs-VHc" secondAttribute="bottom" constant="205" id="zUB-kf-9gj"/>
+                            <constraint firstItem="RpQ-n4-gQb" firstAttribute="leading" secondItem="85t-ra-J9X" secondAttribute="leading" id="6mx-WL-e7s"/>
+                            <constraint firstItem="RpQ-n4-gQb" firstAttribute="top" secondItem="EnN-Bs-VHc" secondAttribute="bottom" id="ERC-c9-4Hb"/>
+                            <constraint firstItem="RpQ-n4-gQb" firstAttribute="bottom" secondItem="x8s-vO-Jq2" secondAttribute="top" id="IFo-tv-GYI"/>
+                            <constraint firstAttribute="trailing" secondItem="RpQ-n4-gQb" secondAttribute="trailing" id="mef-ok-VFc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="67v-cz-IYt"/>
+                    <connections>
+                        <outlet property="spotTypesTable" destination="RpQ-n4-gQb" id="1r8-1D-ISD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1I-Jo-B1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
