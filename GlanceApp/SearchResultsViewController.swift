@@ -104,22 +104,37 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.resultsTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let cell:SearchResultCell = self.resultsTable.dequeueReusableCellWithIdentifier("searchResultCell") as! SearchResultCell
         
         let spotDetails = (itemList[indexPath.row].valueForKey("spotDetails") as? NSDictionary)!
         let spotName = (spotDetails["name"] as? String)!
+//        let spotImageUrl = (spotDetails["Image"] as? String)!
+//        let imageUrl = NSURL(string: spotImageUrl)
+//        let spotImageData = NSData(contentsOfURL: imageUrl!)
+//        let spotImage = UIImage(data: spotImageData!)
 
+        let spotImage = UIImage(named: "Coffee.jpg")
         let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
-        let spotStaffRatingObj = (spotAspects["Staff"] as? NSDictionary)!
-        let spotStaffRating = (spotStaffRatingObj["rating"] as? Int)!
         let spotCoffeeRatingObj = (spotAspects["Coffee"] as? NSDictionary)!
         let spotCoffeeRating = (spotCoffeeRatingObj["rating"] as? Int)!
         let spotSeatingRatingObj = (spotAspects["Seating"] as? NSDictionary)!
         let spotSeatingRating = (spotSeatingRatingObj["rating"] as? Int)!
+        let spotStaffRatingObj = (spotAspects["Staff"] as? NSDictionary)!
+        let spotStaffRating = (spotStaffRatingObj["rating"] as? Int)!
         
-        cell.textLabel?.text = "\(spotName) \nStaff: \(spotStaffRating)  Coffee: \(spotCoffeeRating)  Seating: \(spotSeatingRating)"
-        cell.textLabel?.numberOfLines = 0
-        
+        let spotAddressObj = (spotDetails["address"] as? NSDictionary)!
+        let spotAddressStreet = (spotAddressObj["Street"] as? String)!
+        let spotAddressCity = (spotAddressObj["City"] as? String)!
+//        let spotAddressState = (spotAddressObj["State"] as? String)!
+//        let spotAddressZip = (spotAddressObj["Zip"] as? Int)!
+
+        cell.spotMainImage.image = spotImage
+        cell.spotName.text = spotName
+        cell.spotAddress.text = "\(spotAddressStreet), \(spotAddressCity)"
+        cell.spotCoffeeRating.text = "Coffee: \(spotCoffeeRating)"
+        cell.spotSeatingRating.text = "Seating: \(spotSeatingRating)"
+        cell.spotStaffRating.text = "Staff: \(spotStaffRating)"
+
         return cell
     }
     

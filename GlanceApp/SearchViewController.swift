@@ -36,6 +36,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell:UITableViewCell = self.spotTypesTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
 
         cell.textLabel?.text = "Coffee Places"
+        let backgroundImageName = "coffee.jpg"
+        let backgroundImage = UIImage(named: backgroundImageName)
+        let backgroundImageView = UIImageView(image: backgroundImage!)
+        backgroundImageView.contentMode = .ScaleAspectFit
+        cell.backgroundView = backgroundImageView
+        cell.selectedBackgroundView = backgroundImageView
         cell.textLabel?.numberOfLines = 0
 
         return cell
