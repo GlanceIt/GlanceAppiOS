@@ -33,15 +33,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.spotTypesTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        let cell:SpotTypeCell = self.spotTypesTable.dequeueReusableCellWithIdentifier("spotTypeCell")! as! SpotTypeCell
 
-        cell.textLabel?.text = "Coffee Places"
-        cell.textLabel?.numberOfLines = 0
+        cell.spotTypeImage.image = UIImage(named: "coffee-1.jpg")
+        cell.spotTypeDefinition?.text = "Coffee Places"
+        cell.spotTypeDefinition?.numberOfLines = 1
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell #\(indexPath.row)!")
         let searchResultsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("searchResultsViewController") as! SearchResultsViewController
         //searchResultsViewController.spotDetails = spotDetails
         navigationController?.pushViewController(searchResultsViewController, animated: true)
