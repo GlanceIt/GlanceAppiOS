@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+//    , UICollectionViewDataSource, UICollectionViewDelegate
+{
     
     @IBOutlet weak var resultsTable: UITableView!
     let itemList:NSMutableArray = NSMutableArray()
@@ -113,14 +115,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 //        let spotImageData = NSData(contentsOfURL: imageUrl!)
 //        let spotImage = UIImage(data: spotImageData!)
 
-        let spotImage = UIImage(named: "Coffee.jpg")
-        let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
-        let spotCoffeeRatingObj = (spotAspects["Coffee"] as? NSDictionary)!
-        let spotCoffeeRating = (spotCoffeeRatingObj["rating"] as? Int)!
-        let spotSeatingRatingObj = (spotAspects["Seating"] as? NSDictionary)!
-        let spotSeatingRating = (spotSeatingRatingObj["rating"] as? Int)!
-        let spotStaffRatingObj = (spotAspects["Staff"] as? NSDictionary)!
-        let spotStaffRating = (spotStaffRatingObj["rating"] as? Int)!
+        let spotImage = UIImage(named: "coffee-\(indexPath.item).jpg")
         
         let spotAddressObj = (spotDetails["address"] as? NSDictionary)!
         let spotAddressStreet = (spotAddressObj["Street"] as? String)!
@@ -129,20 +124,20 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 //        let spotAddressZip = (spotAddressObj["Zip"] as? Int)!
 
         cell.spotMainImage.image = spotImage
+        cell.spotName.font = UIFont.boldSystemFontOfSize(14.0)
         cell.spotName.text = spotName
         cell.spotAddress.text = "\(spotAddressStreet), \(spotAddressCity)"
-        cell.spotCoffeeRating.text = "Coffee: \(spotCoffeeRating)"
-        cell.spotSeatingRating.text = "Seating: \(spotSeatingRating)"
-        cell.spotStaffRating.text = "Staff: \(spotStaffRating)"
 
+        let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
+        cell.spotAspects = spotAspects
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let spotDetails = (itemList[indexPath.row].valueForKey("spotDetails") as? NSDictionary)!
-        print("You selected cell #\(indexPath.row)!")
         let detailPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("detailPageViewController") as! DetailPageViewController
         detailPageViewController.spotDetails = spotDetails
+        self.resultsTable.deselectRowAtIndexPath(indexPath, animated: false)
         navigationController?.pushViewController(detailPageViewController, animated: true)
     }
     
