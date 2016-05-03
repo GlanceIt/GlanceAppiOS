@@ -11,6 +11,9 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var spotTypesTable: UITableView!
+    let spotTypes = ["Coffee Places", "Study Places", "Hangout Places", "Dating Places"]
+    let spotTypeDefinitions = ["Good Coffee, Good Seating", "Good Seating, Good Wifi", "Goof Seating, Good Ambience", "Good Ambience, Good Service"]
+    let spotTypeImages = ["coffee-1.jpg", "study.jpg", "hangout.jpg", "dating.jpg"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.spotTypesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -29,15 +32,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return spotTypes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:SpotTypeCell = self.spotTypesTable.dequeueReusableCellWithIdentifier("spotTypeCell")! as! SpotTypeCell
 
-        cell.spotTypeImage.image = UIImage(named: "coffee-1.jpg")
-        cell.spotTypeDefinition?.text = "Coffee Places"
+        cell.spotTypeImage.image = UIImage(named: spotTypeImages[indexPath.item])
+        cell.spotTypeDefinition?.text = spotTypeDefinitions[indexPath.item]
+        cell.spotTypeDefinition?.numberOfLines = 2
+
+        cell.spotType?.font = UIFont.boldSystemFontOfSize(18.0)
+        cell.spotType?.text = spotTypes[indexPath.item]
         cell.spotTypeDefinition?.numberOfLines = 1
+
         return cell
     }
 

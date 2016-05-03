@@ -14,7 +14,11 @@ class SearchResultCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     @IBOutlet weak var spotMainImage: UIImageView!
     @IBOutlet weak var spotAddress: UILabel!
     @IBOutlet weak var spotRatingsCollection: UICollectionView!
+    @IBOutlet weak var spotDistance: UILabel!
+    @IBOutlet weak var spotOverallRatingStars: UIImageView!
+
     var spotAspects: NSDictionary = NSDictionary()
+    var spotOverall: NSDictionary = NSDictionary()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,12 +40,12 @@ class SearchResultCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         let aspectName = (spotAspects.allKeys[indexPath.item] as? String)!
         let ratingObj = (spotAspects[aspectName] as? NSDictionary)!
         let aspectRating = (ratingObj["rating"] as? Int)!
-        var ratingLabel = "*"
-
-        for _ in 1 ..< aspectRating {
-            ratingLabel += "*"
-        }
-        spotRatingsCell.ratingLabel?.text = "\(aspectName): \(ratingLabel)"
+        let aspectRatingCount = (ratingObj["count"] as? Int)!
+        spotRatingsCell.ratingLabel?.text = "\(aspectName)"
+        spotRatingsCell.ratingLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+        spotRatingsCell.ratingCountLabel?.text = "(\(aspectRatingCount))"
+        let starsImage = UIImage(named: "\(aspectRating)-stars.png")
+        spotRatingsCell.ratingStars.image = starsImage
 
         return spotRatingsCell
     }

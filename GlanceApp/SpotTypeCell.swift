@@ -11,6 +11,7 @@ import UIKit
 class SpotTypeCell: UITableViewCell {
 
     @IBOutlet weak var spotTypeImage: UIImageView!
+    @IBOutlet weak var spotType: UILabel!
     @IBOutlet weak var spotTypeDefinition: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

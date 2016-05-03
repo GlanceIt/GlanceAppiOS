@@ -123,13 +123,25 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 //        let spotAddressState = (spotAddressObj["State"] as? String)!
 //        let spotAddressZip = (spotAddressObj["Zip"] as? Int)!
 
+        let spotDistanceObj = (spotDetails["dist"] as? NSDictionary)!
+        let spotDistanceInMeters = (spotDistanceObj["calculated"] as? Double)!
+        let spotDistanceInMiles = spotDistanceInMeters / 1600
         cell.spotMainImage.image = spotImage
+        var spotDistanceString = NSString(format:"%.1f", spotDistanceInMiles)
+        if spotDistanceString == "0.0" {
+           spotDistanceString = NSString(format:"%.2f", spotDistanceInMiles)
+        }
         cell.spotName.font = UIFont.boldSystemFontOfSize(14.0)
         cell.spotName.text = spotName
         cell.spotAddress.text = "\(spotAddressStreet), \(spotAddressCity)"
 
+        let spotOverallRatingObj = (spotDetails["Overall"] as? NSDictionary)!
         let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
+        let spotOverallRating = (spotOverallRatingObj["rating"] as? Int)!
+        let spotOverallRatingStarsImage = UIImage(named: "\(spotOverallRating)-stars.png")
+        cell.spotOverallRatingStars.image = spotOverallRatingStarsImage
         cell.spotAspects = spotAspects
+        cell.spotDistance.text = "\(spotDistanceString) mi"
         return cell
     }
     
@@ -140,7 +152,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         self.resultsTable.deselectRowAtIndexPath(indexPath, animated: false)
         navigationController?.pushViewController(detailPageViewController, animated: true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -11,6 +11,12 @@ import UIKit
 class DetailPageViewController: UIViewController {
 
     @IBOutlet weak var spotNameLabel: UILabel!
+    @IBOutlet weak var overallRating: UILabel!
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var ratings: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var overallStars: UIImageView!
 
     var spotIndex: String = ""
     var spotDetails: NSDictionary = [:];
@@ -20,35 +26,49 @@ class DetailPageViewController: UIViewController {
         
         spotIndex = (spotDetails["index"] as? String)!
         let spotName = (spotDetails["name"] as? String)!
+        let spotAddressObj = (spotDetails["address"] as? NSDictionary)!
+        let spotAddressStreet = (spotAddressObj["Street"] as? String)!
+        let spotAddressCity = (spotAddressObj["City"] as? String)!
+
         let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
 
-        let spotStaffRatingObj = (spotAspects["Staff"] as? NSDictionary)!
-        let spotStaffRating = (spotStaffRatingObj["rating"] as? Int)!
-        let spotCoffeeRatingObj = (spotAspects["Coffee"] as? NSDictionary)!
-        let spotCoffeeRating = (spotCoffeeRatingObj["rating"] as? Int)!
-        let spotSeatingRatingObj = (spotAspects["Seating"] as? NSDictionary)!
-        let spotSeatingRating = (spotSeatingRatingObj["rating"] as? Int)!
+        var aspectRatingLabel = ""
+        var aspectsCount = 1
+        for aspectName in spotAspects.keyEnumerator() {
+            let aspectObj = spotAspects[aspectName as! String] as! NSDictionary
+            let aspectRating = (aspectObj["rating"] as? Int)!
+            let aspectRatingCount = (aspectObj["count"] as? Int)!
+            let ratingLabel = getRatingLabel(aspectRating)
+            aspectRatingLabel += "\(aspectName) \(ratingLabel) (\(aspectRatingCount))\n"
+            aspectsCount = aspectsCount + 1
+        }
 
-//        spotNameLabel?.text = "\(spotIndex)"
-        spotNameLabel?.text = "\(spotIndex) \n\(spotName) \nStaff: \(spotStaffRating) \nCoffee: \(spotCoffeeRating) \nSeating: \(spotSeatingRating)"
+        let overallStarsImage = UIImage(named: "3-stars.png")
+        overallStars.image = overallStarsImage
+
+        spotNameLabel?.text = "\(spotName)"
+        address?.text = "\(spotAddressStreet), \(spotAddressCity)"
+//        \nStaff: \(spotStaffRating) \nCoffee: \(spotCoffeeRating) \nSeating: \(spotSeatingRating)"
+        ratings?.text = aspectRatingLabel
+        ratings?.numberOfLines = aspectsCount
         print("loaded \(spotIndex)")
-        spotNameLabel?.numberOfLines = 5
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
+    func getRatingLabel(rating: Int) -> String {
+        var ratingLabel = "*"
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        for _ in 1 ..< rating {
+            ratingLabel += "*"
+        }
+        for _ in 0 ..< 5 - rating {
+            ratingLabel += " "
+        }
+
+        return ratingLabel
     }
-    */
-
 }
