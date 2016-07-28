@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var spotTypesTable: UITableView!
     let spotTypes = ["Coffee Places", "Study Places", "Hangout Places", "Dating Places"]
     let spotTypeDefinitions = ["Good Coffee, Good Seating", "Good Seating, Good Wifi", "Goof Seating, Good Ambience", "Good Ambience, Good Service"]
-    let spotTypeImages = ["coffee-1.jpg", "study.jpg", "hangout.jpg", "dating.jpg"]
+    let spotTypeImages = ["coffee.jpg", "study.jpg", "hangout.jpg", "dating.jpg"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.spotTypesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -50,8 +50,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell:SpotTypeCell = self.spotTypesTable.cellForRowAtIndexPath(indexPath) as! SpotTypeCell
+
         let searchResultsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("searchResultsViewController") as! SearchResultsViewController
         //searchResultsViewController.spotDetails = spotDetails
+        searchResultsViewController.spotType = cell.spotType.text!
         navigationController?.pushViewController(searchResultsViewController, animated: true)
     }
 
