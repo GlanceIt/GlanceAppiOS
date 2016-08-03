@@ -44,7 +44,7 @@ class SearchResultCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         spotRatingsCell.ratingLabel?.text = "\(aspectName)"
         spotRatingsCell.ratingLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         spotRatingsCell.ratingCountLabel?.text = "(\(aspectRatingCount))"
-        let starsImage = UIImage(named: "\(aspectRating)-stars.png")
+        let starsImage = UIImage(named: "StarImages/\(aspectRating)-stars.png")
         spotRatingsCell.ratingStars.image = starsImage
 
         return spotRatingsCell
