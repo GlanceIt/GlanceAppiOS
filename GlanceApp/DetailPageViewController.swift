@@ -17,10 +17,11 @@ class DetailPageViewController: UIViewController {
     @IBOutlet weak var ratings: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var overallStars: UIImageView!
+    @IBOutlet weak var spotRatingsTable: UITableView!
 
     var spotIndex: String = ""
     var spotDetails: NSDictionary = [:];
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +44,7 @@ class DetailPageViewController: UIViewController {
             aspectsCount = aspectsCount + 1
         }
 
-        let overallStarsImage = UIImage(named: "3-stars.png")
+        let overallStarsImage = UIImage(named: "StarImages/3-stars.png")
         overallStars.image = overallStarsImage
 
         spotNameLabel?.text = "\(spotName)"
@@ -52,6 +53,18 @@ class DetailPageViewController: UIViewController {
         ratings?.text = aspectRatingLabel
         ratings?.numberOfLines = aspectsCount
         print("loaded \(spotIndex)")
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        //let cell = self.spotRatingsTable.deq
+        let cell:UITableViewCell = self.spotRatingsTable.dequeueReusableCellWithIdentifier("spotRatingsCell")!
+        cell.textLabel!.text = (spotDetails["index"] as? String)!
+        cell.detailTextLabel!.text = (spotDetails["index"] as? String)!
+        return cell;
     }
 
     override func didReceiveMemoryWarning() {
