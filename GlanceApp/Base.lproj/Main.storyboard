@@ -181,7 +181,7 @@
             </objects>
             <point key="canvasLocation" x="1093" y="112"/>
         </scene>
-        <!--Places-->
+        <!--Glance-->
         <scene sceneID="nsD-nu-j3O">
             <objects>
                 <viewController storyboardIdentifier="searchViewController" automaticallyAdjustsScrollViewInsets="NO" id="SoZ-DR-wS2" customClass="SearchViewController" customModule="Glance" customModuleProvider="target" sceneMemberID="viewController">
@@ -258,7 +258,7 @@
                             <constraint firstAttribute="trailing" secondItem="RpQ-n4-gQb" secondAttribute="trailing" id="mef-ok-VFc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Places" id="67v-cz-IYt"/>
+                    <navigationItem key="navigationItem" title="Glance" id="67v-cz-IYt"/>
                     <connections>
                         <outlet property="spotTypesTable" destination="RpQ-n4-gQb" id="1r8-1D-ISD"/>
                     </connections>

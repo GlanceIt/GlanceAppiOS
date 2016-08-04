@@ -22,6 +22,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.resultsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.title = spotType
         
         getSpotList()
     }
