@@ -19,6 +19,8 @@ class SearchResultCell: UITableViewCell, UICollectionViewDataSource, UICollectio
 
     var spotAspects: NSDictionary = NSDictionary()
     var spotOverall: NSDictionary = NSDictionary()
+    var aspectWeights: NSDictionary = NSDictionary()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,10 +39,20 @@ class SearchResultCell: UITableViewCell, UICollectionViewDataSource, UICollectio
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let spotRatingsCell:SpotRatingsCollectionCell = self.spotRatingsCollection.dequeueReusableCellWithReuseIdentifier("spotRatingsCollectionCell", forIndexPath: indexPath) as! SpotRatingsCollectionCell
 
-        let aspectName = (spotAspects.allKeys[indexPath.item] as? String)!
+        let sortedAspects = self.aspectWeights.keysSortedByValueUsingComparator{
+            (obj1, obj2) in
+            let x = obj1 as! NSNumber
+            let y = obj2 as! NSNumber
+            return y.compare(x)
+        }
+
+        var aspectName = (sortedAspects[indexPath.item] as? String)!
         let ratingObj = (spotAspects[aspectName] as? NSDictionary)!
         let aspectRating = (ratingObj["rating"] as? Int)!
         let aspectRatingCount = (ratingObj["count"] as? Int)!
+        let aspectNameStartIndex = aspectName.startIndex
+        aspectName.replaceRange(aspectNameStartIndex...aspectNameStartIndex, with: String(aspectName[aspectNameStartIndex]).uppercaseString)
+
         spotRatingsCell.ratingLabel?.text = "\(aspectName)"
         spotRatingsCell.ratingLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         spotRatingsCell.ratingCountLabel?.text = "(\(aspectRatingCount))"

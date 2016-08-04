@@ -18,6 +18,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     let SPOTLIST_URL = "/spotlist"
     let SEARCH_URL = "/search"
     var spotType = "";
+    var aspectWeights:NSDictionary = NSDictionary();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +48,13 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         var weights = NSDictionary()
         switch self.spotType {
             case "Coffee Places":
-                weights = ["coffeeWeight" : 100]
+                weights = ["coffee" : 100]
             case "Study Places":
-                weights = ["wifiWeight" : 10, "seatingWeight": 100, "parkingWeight": 2]
+                weights = ["wifi" : 10, "seating": 100, "parking": 2]
             case "Hangout Places":
-                weights = ["seatingWeight" : 100, "parkingWeight": 10]
+                weights = ["seating" : 100, "parking": 10]
             case "Dating Places":
-                weights = ["staffWeight" : 10, "seatingWeight": 100]
+                weights = ["staff" : 10, "seating": 100]
             default:
                 weights = NSDictionary()
         }
@@ -100,17 +101,21 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
             dispatch_async(dispatch_get_main_queue(), {
                 // Convert server json response to NSDictionary
                 do {
-                    if let results = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSArray {
+                    if let results = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
                         
                         // Print out dictionary
                         // print(convertedJsonIntoDict)
                         
-                        // Get value by key
+                        // Get "weights" from the results
+                        self.aspectWeights = results["weights"] as! NSDictionary;
                         
-                        for spot in results{
+                        // Get "spots" from the results
+                        let spots = results["spots"] as! NSArray;
+
+                        for spot in spots{
                             self.addSpot(spot as! NSDictionary)
                         }// for
-                        
+
                         self.resultsTable.reloadData()
                     }
                 } catch let error as NSError {
@@ -160,6 +165,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
            spotDistanceString = NSString(format:"%.2f", spotDistanceInMiles)
         }
 
+        cell.aspectWeights = self.aspectWeights
         cell.spotMainImage.image = spotImage
         cell.spotName.font = UIFont.boldSystemFontOfSize(14.0)
         cell.spotName.text = spotName
