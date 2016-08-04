@@ -1,2 +1,5 @@
-**/.DS_Store
-Glance.xcodeproj/
+.DS_Store
+xcuserdata/
+project.xcworkspace/
+Trashes
+*.swp
