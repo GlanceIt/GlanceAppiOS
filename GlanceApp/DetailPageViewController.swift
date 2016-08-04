@@ -28,8 +28,8 @@ class DetailPageViewController: UIViewController {
         spotIndex = (spotDetails["index"] as? String)!
         let spotName = (spotDetails["name"] as? String)!
         let spotAddressObj = (spotDetails["address"] as? NSDictionary)!
-        let spotAddressStreet = (spotAddressObj["Street"] as? String)!
-        let spotAddressCity = (spotAddressObj["City"] as? String)!
+        let spotAddressStreet = (spotAddressObj["street"] as? String)!
+        let spotAddressCity = (spotAddressObj["city"] as? String)!
 
         let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
 

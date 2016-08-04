@@ -151,10 +151,10 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         let spotImage = UIImage(named: "SpotImages/\(spotIndex).jpg")
         
         let spotAddressObj = (spotDetails["address"] as? NSDictionary)!
-        let spotAddressStreet = (spotAddressObj["Street"] as? String)!
-        let spotAddressCity = (spotAddressObj["City"] as? String)!
-//        let spotAddressState = (spotAddressObj["State"] as? String)!
-//        let spotAddressZip = (spotAddressObj["Zip"] as? Int)!
+        let spotAddressStreet = (spotAddressObj["street"] as? String)!
+        let spotAddressCity = (spotAddressObj["city"] as? String)!
+//        let spotAddressState = (spotAddressObj["state"] as? String)!
+//        let spotAddressZip = (spotAddressObj["zip"] as? Int)!
 
         let spotDistanceObj =
             (spotDetails["dist"] as? NSDictionary)!
@@ -171,7 +171,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         cell.spotName.text = spotName
         cell.spotAddress.text = "\(spotAddressStreet), \(spotAddressCity)"
 
-        let spotOverallRatingObj = (spotDetails["Overall"] as? NSDictionary)!
+        let spotOverallRatingObj = (spotDetails["overall"] as? NSDictionary)!
         let spotAspects = (spotDetails["aspects"] as? NSDictionary)!
         let spotOverallRating = (spotOverallRatingObj["rating"] as? Int)!
         let spotOverallRatingStarsImage = UIImage(named: "StarImages/\(spotOverallRating)-stars.png")
