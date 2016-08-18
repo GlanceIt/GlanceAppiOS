@@ -19,6 +19,9 @@
 		2889075C1CBFC7B600FDBFCC /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889075B1CBFC7B600FDBFCC /* DetailPageViewController.swift */; };
 		28A4CE531CC77AB9005344A9 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A4CE521CC77AB9005344A9 /* SearchResultCell.swift */; };
 		28BB88171CC2F9440075A186 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB88161CC2F9440075A186 /* SearchViewController.swift */; };
+		E26AF0601D63B9B5001E997F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E26AF05E1D63B9B5001E997F /* LaunchScreen.storyboard */; };
+		E26AF0621D6443D0001E997F /* glancing_yet.png in Resources */ = {isa = PBXBuildFile; fileRef = E26AF0611D6443D0001E997F /* glancing_yet.png */; };
+		E26AF0641D644EA0001E997F /* Glance.png in Resources */ = {isa = PBXBuildFile; fileRef = E26AF0631D644EA0001E997F /* Glance.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		2889075B1CBFC7B600FDBFCC /* DetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPageViewController.swift; sourceTree = "<group>"; };
 		28A4CE521CC77AB9005344A9 /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		28BB88161CC2F9440075A186 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E26AF05F1D63B9B5001E997F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = GlanceApp/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E26AF0611D6443D0001E997F /* glancing_yet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glancing_yet.png; sourceTree = "<group>"; };
+		E26AF0631D644EA0001E997F /* Glance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Glance.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,8 @@
 		280445411CB08B500042EAB4 /* GlanceApp */ = {
 			isa = PBXGroup;
 			children = (
+				E26AF0631D644EA0001E997F /* Glance.png */,
+				E26AF0611D6443D0001E997F /* glancing_yet.png */,
 				280F0B091D52CB9E00F0B70E /* SpotTypeImages */,
 				284D7CF01D51973800968B99 /* StarImages */,
 				284D7CEE1D51971700968B99 /* SpotImages */,
@@ -78,6 +86,7 @@
 				280445421CB08B500042EAB4 /* AppDelegate.swift */,
 				280445441CB08B500042EAB4 /* SearchResultsViewController.swift */,
 				280445461CB08B500042EAB4 /* Main.storyboard */,
+				E26AF05E1D63B9B5001E997F /* LaunchScreen.storyboard */,
 				280FE7B91CC8EB34008CEBD6 /* SpotTypeCell.swift */,
 				280445491CB08B500042EAB4 /* Assets.xcassets */,
 				2804454E1CB08B500042EAB4 /* Info.plist */,
@@ -117,7 +126,7 @@
 				TargetAttributes = {
 					2804453E1CB08B500042EAB4 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = VNU422G8A8;
+						DevelopmentTeam = T9RE464W96;
 					};
 				};
 			};
@@ -147,8 +156,11 @@
 				284D7CEF1D51971700968B99 /* SpotImages in Resources */,
 				284D7CF11D51973800968B99 /* StarImages in Resources */,
 				280F0B0A1D52CB9E00F0B70E /* SpotTypeImages in Resources */,
+				E26AF0601D63B9B5001E997F /* LaunchScreen.storyboard in Resources */,
 				2804454A1CB08B500042EAB4 /* Assets.xcassets in Resources */,
+				E26AF0621D6443D0001E997F /* glancing_yet.png in Resources */,
 				280445481CB08B500042EAB4 /* Main.storyboard in Resources */,
+				E26AF0641D644EA0001E997F /* Glance.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +190,15 @@
 				280445471CB08B500042EAB4 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E26AF05E1D63B9B5001E997F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E26AF05F1D63B9B5001E997F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -272,7 +293,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GlanceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.glance-app.GlanceApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com-glance-app-GlanceApp";
 				PRODUCT_NAME = Glance;
 				PROVISIONING_PROFILE = "";
 			};
@@ -286,7 +307,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GlanceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.glance-app.GlanceApp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com-glance-app-GlanceApp";
 				PRODUCT_NAME = Glance;
 				PROVISIONING_PROFILE = "";
 			};
