@@ -27,6 +27,34 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         
         getSpotList()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        let cells:[SearchResultCell] = self.resultsTable.visibleCells as! [SearchResultCell]
+        
+        print("Table Cells: \(cells)")
+        
+        // We want to animate the rating collection of the first cell to illustrate scrollability
+        let firstCell:SearchResultCell = cells[0]
+        //firstCell.spotRatingsCollection.setContentOffset(CGPoint(x: 20, y: 0), animated: true)
+        
+        UIView.animateWithDuration(0.3,
+            delay: 0.5,
+            options: UIViewAnimationOptions.CurveEaseIn,
+            animations: {
+                firstCell.spotRatingsCollection.setContentOffset(CGPoint(x: 20, y: 0), animated: false)
+            },
+            completion: { finished in
+                UIView.animateWithDuration(0.3,
+                    delay: 0.0,
+                    options: UIViewAnimationOptions.CurveEaseInOut,
+                    animations: {
+                        firstCell.spotRatingsCollection.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+                    },
+                    completion: nil
+                )
+        })
+    }
 
     func getSpotList() {
         // Define server side script URL
@@ -136,7 +164,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:SearchResultCell = self.resultsTable.dequeueReusableCellWithIdentifier("searchResultCell") as! SearchResultCell
-        
+
         let spotDetails = (itemList[indexPath.row] as? NSDictionary)!
         let spotName = (spotDetails["name"] as? String)!
         let spotIndex = (spotDetails["index"] as? String)!
