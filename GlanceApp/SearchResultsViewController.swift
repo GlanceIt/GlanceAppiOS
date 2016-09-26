@@ -14,7 +14,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var resultsTable: UITableView!
     let itemList:NSMutableArray = NSMutableArray()
-    let GLANCE_SERVICE_ENDPOINT_URI = "http://ec2-52-89-65-158.us-west-2.compute.amazonaws.com:5000"
+    let GLANCE_SERVICE_ENDPOINT_URI = "http://ec2-52-41-215-9.us-west-2.compute.amazonaws.com:5000"
     let SPOTLIST_URL = "/spotlist"
     let SEARCH_URL = "/search"
     var spotType = "";
